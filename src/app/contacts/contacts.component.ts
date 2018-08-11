@@ -10,7 +10,7 @@ import { ContactService } from './shared/contact.service';
 })
 export class ContactsComponent implements OnInit {
 
-  contacts: Contact[];
+  allContacts: Contact[];
   filteredContacts: Contact[];
 
   columnIds = ['name', 'phone_number', 'address'];
@@ -22,7 +22,7 @@ export class ContactsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.contactService.getContacts().subscribe(contacts => this.filteredContacts = this.contacts = contacts);
+    this.contactService.getContacts().subscribe(contacts => this.filteredContacts = this.allContacts = contacts);
   }
 
   /**
@@ -31,7 +31,7 @@ export class ContactsComponent implements OnInit {
    * @param filter the filter
    */
   onFilter(filter: string): void {
-    this.filteredContacts = this.contacts.filter(contact => {
+    this.filteredContacts = this.allContacts.filter(contact => {
       return contact.name.includes(filter) || contact.phone_number.includes(filter) || contact.address.includes(filter);
     });
   }
@@ -45,7 +45,7 @@ export class ContactsComponent implements OnInit {
     this.ascendingSort = this.sortedColumn === columnId ? !this.ascendingSort : true;
     this.sortedColumn = columnId;
 
-    this.contacts.sort((contact1, contact2) => {
+    this.allContacts.sort((contact1, contact2) => {
       let result = contact1[columnId].localeCompare(contact2[columnId]);
 
       if (!this.ascendingSort) {
