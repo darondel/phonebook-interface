@@ -3,7 +3,8 @@
     <span class="input-group-text"><i class="fas fa-filter"></i></span>
   </div>
   <label for="filter" class="sr-only">Filter</label>
-  <input type="text" class="form-control" id="filter" placeholder="Add a filter" (input)="onFilter($event)">
+  <input type="text" class="form-control" id="filter" placeholder="Add a filter"
+         (input)="onFilter($event.target.value)">
 </div>
 
 <hr>
@@ -13,7 +14,7 @@
     <thead>
     <tr>
       <th scope="col" *ngFor="let columnId of columnIds">
-        <a [id]="columnId" (click)="onSort($event)">
+        <a [id]="columnId" (click)="onSort($event.srcElement.id)">
           {{ columnId.replace('_', ' ') | titlecase }}
           <i *ngIf="sortedColumn === columnId" class="fas fa-sort-{{ ascendingSort ? 'up' : 'down' }}"></i>
         </a>

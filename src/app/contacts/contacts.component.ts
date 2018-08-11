@@ -28,11 +28,9 @@ export class ContactsComponent implements OnInit {
   /**
    * Filter the contact array according to the event source value.
    *
-   * @param event the input event
+   * @param filter the filter
    */
-  onFilter(event: InputEvent) {
-    const filter = event.srcElement.value;
-
+  onFilter(filter: string): void {
     this.filteredContacts = this.contacts.filter(contact => {
       return contact.name.includes(filter) || contact.phone_number.includes(filter) || contact.address.includes(filter);
     });
@@ -41,11 +39,9 @@ export class ContactsComponent implements OnInit {
   /**
    * Sort the contact array according to the event source element id.
    *
-   * @param event the mouse event
+   * @param columnId the column id to sort
    */
-  onSort(event: MouseEvent) {
-    const columnId = event.srcElement.id;
-
+  onSort(columnId: string): void {
     this.ascendingSort = this.sortedColumn === columnId ? !this.ascendingSort : true;
     this.sortedColumn = columnId;
 
