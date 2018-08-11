@@ -11,6 +11,7 @@ import { ContactService } from './shared/contact.service';
 export class ContactsComponent implements OnInit {
 
   contacts: Contact[];
+  filteredContacts: Contact[];
 
   columnIds = ['name', 'phone_number', 'address'];
 
@@ -21,13 +22,26 @@ export class ContactsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.contactService.getContacts().subscribe(contacts => this.contacts = contacts);
+    this.contactService.getContacts().subscribe(contacts => this.filteredContacts = this.contacts = contacts);
+  }
+
+  /**
+   * Filter the contact array according to the event source value.
+   *
+   * @param event the input event
+   */
+  onFilter(event: InputEvent) {
+    const filter = event.srcElement.value;
+
+    this.filteredContacts = this.contacts.filter(contact => {
+      return contact.name.includes(filter) || contact.phone_number.includes(filter) || contact.address.includes(filter);
+    });
   }
 
   /**
    * Sort the contact array according to the event source element id.
    *
-   * @param event the click event
+   * @param event the mouse event
    */
   onSort(event: MouseEvent) {
     const columnId = event.srcElement.id;
