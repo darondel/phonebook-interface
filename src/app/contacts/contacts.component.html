@@ -2,9 +2,12 @@
   <table class="table table-striped">
     <thead>
     <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Phone Number</th>
-      <th scope="col">Address</th>
+      <th scope="col" *ngFor="let columnId of columnIds">
+        <a [id]="columnId" (click)="onSort($event)">
+          {{ columnId.replace('_', ' ') | titlecase }}
+          <i *ngIf="sortedColumn === columnId" class="fas fa-sort-{{ ascendingSort ? 'up' : 'down' }}"></i>
+        </a>
+      </th>
     </tr>
     </thead>
     <tbody>
