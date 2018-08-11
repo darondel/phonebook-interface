@@ -1,6 +1,7 @@
-export class Contact {
+export interface Contact {
 
-  constructor(public name: string, public phone_number: string, public address: string) {
-  }
+  name: string;
+  phone_number: string;
+  address: string;
 
 }
