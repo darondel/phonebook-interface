@@ -45,7 +45,7 @@ export class ContactsComponent implements OnInit {
     this.ascendingSort = this.sortedColumn === columnId ? !this.ascendingSort : true;
     this.sortedColumn = columnId;
 
-    this.allContacts.sort((contact1, contact2) => {
+    this.filteredContacts = this.allContacts.sort((contact1, contact2) => {
       let result = contact1[columnId].localeCompare(contact2[columnId]);
 
       if (!this.ascendingSort) {
